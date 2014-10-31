@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns4="http://www.omg.org/spec/DD/20100524/DI" xmlns:savns0="http://www.example.org/policyQuote" xmlns:tns="http://www.savara.org/policyQuote/Driver" id="id-policyQuote-Driver" targetNamespace="http://www.savara.org/policyQuote/Driver">
+    <bpmn2:import importType="http://www.w3.org/2001/XMLSchema" location="../schema/policyQuote.xsd" namespace="http://www.example.org/policyQuote"/>
+    <bpmn2:itemDefinition id="ITEMpolicyQuote" structureRef="savns0:policyQuote"/>
+    <bpmn2:message id="IDpolicyQuote" itemRef="tns:ITEMpolicyQuote" name="policyQuote"/>
+    <bpmn2:itemDefinition id="ITEMpolicyQuoteReply" structureRef="savns0:policyQuoteReply"/>
+    <bpmn2:message id="IDpolicyQuoteReply" itemRef="tns:ITEMpolicyQuoteReply" name="policyQuoteReply"/>
+    <bpmn2:itemDefinition id="ITEMpolicyQuoteFault" structureRef="savns0:policyQuoteFault"/>
+    <bpmn2:message id="IDpolicyQuoteFault" itemRef="tns:ITEMpolicyQuoteFault" name="policyQuoteFault"/>
+    <bpmn2:collaboration id="id-32eefc42-d9d6-44e3-b844-fc38a192c378">
+        <bpmn2:participant id="id-7961c58f-e502-4add-ab96-df14a220fa2b" name="Driver" processRef="tns:id-7e689337-2f09-4abb-836e-70d37c5a0e06"/>
+    </bpmn2:collaboration>
+    <bpmn2:process id="id-7e689337-2f09-4abb-836e-70d37c5a0e06" name="Driver">
+        <bpmn2:startEvent id="id-a0a0e05f-beef-41e6-aa6c-c7e10c1fdb49">
+            <bpmn2:outgoing>tns:id-2c9f2962-e1ee-4a8a-ab9d-6f08adf89530</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:endEvent id="id-b224c1f4-f8ea-4612-804f-22bd64412866">
+            <bpmn2:incoming>tns:id-9c4c245f-f4c5-4add-ada3-e455e7af3cbc</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="id-59e0d195-846e-42f3-8fdc-f74338da5a69" name="Service: receivePolicyQuote(policyQuote) to PolicyQuoteProcess" operationRef="tns:OP_PolicyQuoteProcess_receivePolicyQuote" xsi:type="bpmn2:tServiceTask">
+            <bpmn2:incoming>tns:id-2c9f2962-e1ee-4a8a-ab9d-6f08adf89530</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-3ae99de0-a630-46cf-b320-6ddcf1ddc482</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:exclusiveGateway gatewayDirection="Diverging" id="id-6d28332b-7d74-4ff3-be18-de2e44d80791">
+            <bpmn2:incoming>tns:id-3ae99de0-a630-46cf-b320-6ddcf1ddc482</bpmn2:incoming>
+            <bpmn2:incoming>tns:id-12e9b1ec-6157-40b3-979e-fd9e8da58f78</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-9c4c245f-f4c5-4add-ada3-e455e7af3cbc</bpmn2:outgoing>
+        </bpmn2:exclusiveGateway>
+        <bpmn2:boundaryEvent attachedToRef="tns:id-59e0d195-846e-42f3-8fdc-f74338da5a69" id="id-9c377fff-264c-40fc-95c3-8c7c66135e3c">
+            <bpmn2:outgoing>tns:id-12e9b1ec-6157-40b3-979e-fd9e8da58f78</bpmn2:outgoing>
+            <bpmn2:errorEventDefinition errorRef="tns:ERRTooManyAccidents" id="id-e8282907-ac16-4afc-acea-8caf85e2fde9"/>
+        </bpmn2:boundaryEvent>
+        <bpmn2:sequenceFlow id="id-3ae99de0-a630-46cf-b320-6ddcf1ddc482" sourceRef="id-59e0d195-846e-42f3-8fdc-f74338da5a69" targetRef="id-6d28332b-7d74-4ff3-be18-de2e44d80791"/>
+        <bpmn2:sequenceFlow id="id-12e9b1ec-6157-40b3-979e-fd9e8da58f78" sourceRef="id-9c377fff-264c-40fc-95c3-8c7c66135e3c" targetRef="id-6d28332b-7d74-4ff3-be18-de2e44d80791"/>
+        <bpmn2:sequenceFlow id="id-2c9f2962-e1ee-4a8a-ab9d-6f08adf89530" sourceRef="id-a0a0e05f-beef-41e6-aa6c-c7e10c1fdb49" targetRef="id-59e0d195-846e-42f3-8fdc-f74338da5a69"/>
+        <bpmn2:sequenceFlow id="id-9c4c245f-f4c5-4add-ada3-e455e7af3cbc" sourceRef="id-6d28332b-7d74-4ff3-be18-de2e44d80791" targetRef="id-b224c1f4-f8ea-4612-804f-22bd64412866"/>
+    </bpmn2:process>
+    <bpmn2:interface id="PolicyQuoteProcessInterface" name="PolicyQuoteProcess">
+        <bpmn2:operation id="OP_PolicyQuoteProcess_receivePolicyQuote" name="receivePolicyQuote">
+            <bpmn2:inMessageRef>tns:IDpolicyQuote</bpmn2:inMessageRef>
+            <bpmn2:outMessageRef>tns:IDpolicyQuoteReply</bpmn2:outMessageRef>
+            <bpmn2:errorRef>tns:ERRTooManyAccidents</bpmn2:errorRef>
+        </bpmn2:operation>
+    </bpmn2:interface>
+    <bpmn2:error errorCode="TooManyAccidents" id="ERRTooManyAccidents" name="TooManyAccidents" structureRef="tns:ITEMpolicyQuoteFault"/>
+    <bpmndi:BPMNDiagram id="id-fe96d421-5804-45b3-a285-a451832de7a5">
+        <bpmndi:BPMNPlane>
+            <bpmndi:BPMNShape bpmnElement="tns:id-7961c58f-e502-4add-ab96-df14a220fa2b" id="id-73cc14e0-4b11-4b0a-a988-1522db264e33">
+                <dc:Bounds height="140.0" width="500.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-a0a0e05f-beef-41e6-aa6c-c7e10c1fdb49" id="id-c91dcb7f-f9f1-42f6-b6ef-81a04355898b">
+                <dc:Bounds height="30.0" width="30.0" x="50.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-59e0d195-846e-42f3-8fdc-f74338da5a69" id="id-85d3a1a9-1f6c-44f1-be67-816f56ae560e">
+                <dc:Bounds height="60.0" width="110.0" x="130.0" y="40.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-6d28332b-7d74-4ff3-be18-de2e44d80791" id="id-6774ad5a-c814-459e-ac66-456113b68fa8">
+                <dc:Bounds height="30.0" width="30.0" x="340.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-3ae99de0-a630-46cf-b320-6ddcf1ddc482" id="id-797b3a9b-e3d2-4664-9b74-193b5b558aa3" sourceElement="tns:id-85d3a1a9-1f6c-44f1-be67-816f56ae560e" targetElement="tns:id-6774ad5a-c814-459e-ac66-456113b68fa8">
+                <ns4:waypoint x="240.0" y="70.0"/>
+                <ns4:waypoint x="340.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="tns:id-9c377fff-264c-40fc-95c3-8c7c66135e3c" id="id-0fe71e9b-0507-47d7-ad96-ab65b7a121f4">
+                <dc:Bounds height="30.0" width="30.0" x="130.0" y="85.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-12e9b1ec-6157-40b3-979e-fd9e8da58f78" id="id-a4db862c-ff50-42d2-a1c1-61a92aec86a2" sourceElement="tns:id-0fe71e9b-0507-47d7-ad96-ab65b7a121f4" targetElement="tns:id-6774ad5a-c814-459e-ac66-456113b68fa8">
+                <ns4:waypoint x="160.0" y="100.0"/>
+                <ns4:waypoint x="145.0" y="70.0"/>
+                <ns4:waypoint x="340.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-2c9f2962-e1ee-4a8a-ab9d-6f08adf89530" id="id-cf46fdaf-bb80-4d84-8016-c61cb86e0afc" sourceElement="tns:id-c91dcb7f-f9f1-42f6-b6ef-81a04355898b" targetElement="tns:id-85d3a1a9-1f6c-44f1-be67-816f56ae560e">
+                <ns4:waypoint x="80.0" y="70.0"/>
+                <ns4:waypoint x="130.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="tns:id-b224c1f4-f8ea-4612-804f-22bd64412866" id="id-c17a1569-73f9-44a8-942e-5fb855a8cc41">
+                <dc:Bounds height="30.0" width="30.0" x="420.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-9c4c245f-f4c5-4add-ada3-e455e7af3cbc" id="id-0ed98088-aea3-4964-bd11-f06ab984e754" sourceElement="tns:id-6774ad5a-c814-459e-ac66-456113b68fa8" targetElement="tns:id-c17a1569-73f9-44a8-942e-5fb855a8cc41">
+                <ns4:waypoint x="390.0" y="70.0"/>
+                <ns4:waypoint x="420.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

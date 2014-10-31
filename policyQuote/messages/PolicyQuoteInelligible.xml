@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pol:policyQuoteFault 
+	xmlns:pol="http://www.example.org/policyQuote"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/policyQuote ../schema/policyQuote.xsd">
+ 	
+ 	  <pol:policyQuoteFault>
+     	<pol:requestDate>2009-01-01</pol:requestDate>
+    	<pol:task>receivePolicyQuote</pol:task>
+		<pol:code>FAULT01</pol:code>
+    	<pol:reason>too many accidents</pol:reason>
+     	<pol:policyQuoteInfo>
+			<pol:policyType>AUTO</pol:policyType>
+			<pol:vehicleYear>2004</pol:vehicleYear>
+			<pol:driverName>Bill Smith</pol:driverName>
+ 			<pol:ssn>012345678</pol:ssn>
+ 			<pol:dlNumber>987654321</pol:dlNumber>
+ 			<pol:age>30</pol:age>
+  			<pol:numberOfAccidents>2</pol:numberOfAccidents>
+  			<pol:numberOfTickets>5</pol:numberOfTickets>
+     		<pol:creditScore>0</pol:creditScore>
+      		<pol:price>0</pol:price>
+    	</pol:policyQuoteInfo>
+  	 </pol:policyQuoteFault>
+    	
+</pol:policyQuoteFault>

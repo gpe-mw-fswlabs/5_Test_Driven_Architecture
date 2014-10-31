@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pol:policyQuoteReply 
+	xmlns:pol="http://www.example.org/policyQuote"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.example.org/policyQuote ../schema/policyQuoteResponse.xsd">
+   
+  <pol:calculatePolicyQuote>
+ 	<pol:requestDate>2009-01-01</pol:requestDate>
+    <pol:task>calculatePolicyQuote</pol:task>
+    <pol:policyQuoteInfo>
+		<pol:policyType>AUTO</pol:policyType>
+		<pol:vehicleYear>2004</pol:vehicleYear>
+		<pol:driverName>Bill Smith</pol:driverName>
+ 		<pol:ssn>012345678</pol:ssn>
+ 		<pol:dlNumber>987654321</pol:dlNumber>
+ 		<pol:age>30</pol:age>
+  		<pol:numberOfAccidents>1</pol:numberOfAccidents>
+  		<pol:numberOfTickets>2</pol:numberOfTickets>
+    	<pol:creditScore>500</pol:creditScore>
+    	<pol:price>300</pol:price>
+    </pol:policyQuoteInfo>
+  </pol:calculatePolicyQuote>
+</pol:policyQuoteReply>

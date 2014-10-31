@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns4="http://www.omg.org/spec/DD/20100524/DI" xmlns:savns0="http://creditagency.com/creditCheck" xmlns:tns="http://www.savara.org/policyQuote/CreditCheckService" id="id-policyQuote-CreditCheckService" targetNamespace="http://www.savara.org/policyQuote/CreditCheckService">
+    <bpmn2:import importType="http://www.w3.org/2001/XMLSchema" location="../schema/creditCheck.xsd" namespace="http://creditagency.com/creditCheck"/>
+    <bpmn2:itemDefinition id="ITEMcreditCheckRequest" structureRef="savns0:creditCheckRequest"/>
+    <bpmn2:message id="IDcreditCheckRequest" itemRef="tns:ITEMcreditCheckRequest" name="creditCheckRequest"/>
+    <bpmn2:itemDefinition id="ITEMcreditCheckResponse" structureRef="savns0:creditCheckResponse"/>
+    <bpmn2:message id="IDcreditCheckResponse" itemRef="tns:ITEMcreditCheckResponse" name="creditCheckResponse"/>
+    <bpmn2:collaboration id="id-e5fe313f-740c-4f67-997d-2774ec6183a5">
+        <bpmn2:participant id="id-76584819-c057-4281-bb0c-df6513b2440d" name="CreditCheckService" processRef="tns:id-69c2cdd9-7d84-4cf3-b929-d192e7f6821b"/>
+    </bpmn2:collaboration>
+    <bpmn2:process id="id-69c2cdd9-7d84-4cf3-b929-d192e7f6821b" name="CreditCheckService">
+        <bpmn2:startEvent id="id-991fcd64-367d-4070-afe1-2e60852d4cb2">
+            <bpmn2:outgoing>tns:id-820f0e89-ef2f-488e-a486-af1936552ff9</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:endEvent id="id-7a118bc7-5c85-4823-8441-8a2d270735f7">
+            <bpmn2:incoming>tns:id-9b1c23a4-b2a2-4559-b2cd-c516994ae894</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="id-a144fb57-a1d8-499a-8fcf-8ce9d3eb8bbd" messageRef="tns:IDcreditCheckRequest" name="Receive: checkCredit(creditCheckRequest) from PolicyQuoteProcess" operationRef="tns:OP_CreditCheckService_checkCredit" xsi:type="bpmn2:tReceiveTask">
+            <bpmn2:incoming>tns:id-820f0e89-ef2f-488e-a486-af1936552ff9</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-d93e9c3c-5f8e-443d-a952-afcb796fbb2c</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="id-534b3b13-f68c-4cc1-87f9-55ac9fd098a0" messageRef="tns:IDcreditCheckResponse" name="Send: checkCredit(creditCheckResponse) to PolicyQuoteProcess" operationRef="tns:OP_CreditCheckService_checkCredit" xsi:type="bpmn2:tSendTask">
+            <bpmn2:incoming>tns:id-d93e9c3c-5f8e-443d-a952-afcb796fbb2c</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-9b1c23a4-b2a2-4559-b2cd-c516994ae894</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:sequenceFlow id="id-d93e9c3c-5f8e-443d-a952-afcb796fbb2c" sourceRef="id-a144fb57-a1d8-499a-8fcf-8ce9d3eb8bbd" targetRef="id-534b3b13-f68c-4cc1-87f9-55ac9fd098a0"/>
+        <bpmn2:sequenceFlow id="id-820f0e89-ef2f-488e-a486-af1936552ff9" sourceRef="id-991fcd64-367d-4070-afe1-2e60852d4cb2" targetRef="id-a144fb57-a1d8-499a-8fcf-8ce9d3eb8bbd"/>
+        <bpmn2:sequenceFlow id="id-9b1c23a4-b2a2-4559-b2cd-c516994ae894" sourceRef="id-534b3b13-f68c-4cc1-87f9-55ac9fd098a0" targetRef="id-7a118bc7-5c85-4823-8441-8a2d270735f7"/>
+    </bpmn2:process>
+    <bpmn2:interface id="CreditCheckServiceInterface" name="CreditCheckService">
+        <bpmn2:operation id="OP_CreditCheckService_checkCredit" name="checkCredit">
+            <bpmn2:inMessageRef>tns:IDcreditCheckRequest</bpmn2:inMessageRef>
+            <bpmn2:outMessageRef>tns:IDcreditCheckResponse</bpmn2:outMessageRef>
+        </bpmn2:operation>
+    </bpmn2:interface>
+    <bpmndi:BPMNDiagram id="id-d13b7888-5aca-4759-be92-8368f70321ca">
+        <bpmndi:BPMNPlane>
+            <bpmndi:BPMNShape bpmnElement="tns:id-76584819-c057-4281-bb0c-df6513b2440d" id="id-929fef4a-4bcf-413e-9923-003a6b228382">
+                <dc:Bounds height="140.0" width="530.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-991fcd64-367d-4070-afe1-2e60852d4cb2" id="id-0c51b384-3efe-49b8-bd3f-ab49af773501">
+                <dc:Bounds height="30.0" width="30.0" x="50.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-a144fb57-a1d8-499a-8fcf-8ce9d3eb8bbd" id="id-0a440027-d3fc-4fc3-a943-00f48568c213">
+                <dc:Bounds height="60.0" width="110.0" x="130.0" y="40.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-534b3b13-f68c-4cc1-87f9-55ac9fd098a0" id="id-d4f0c694-7deb-4e74-b782-d9ac8e57e480">
+                <dc:Bounds height="60.0" width="110.0" x="290.0" y="40.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-d93e9c3c-5f8e-443d-a952-afcb796fbb2c" id="id-ad23f301-88e1-45a3-b4f4-ed9338972e9a" sourceElement="tns:id-0a440027-d3fc-4fc3-a943-00f48568c213" targetElement="tns:id-d4f0c694-7deb-4e74-b782-d9ac8e57e480">
+                <ns4:waypoint x="240.0" y="70.0"/>
+                <ns4:waypoint x="290.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-820f0e89-ef2f-488e-a486-af1936552ff9" id="id-6be45e01-9bc6-49d9-8f0b-bc05d250d4eb" sourceElement="tns:id-0c51b384-3efe-49b8-bd3f-ab49af773501" targetElement="tns:id-0a440027-d3fc-4fc3-a943-00f48568c213">
+                <ns4:waypoint x="80.0" y="70.0"/>
+                <ns4:waypoint x="130.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="tns:id-7a118bc7-5c85-4823-8441-8a2d270735f7" id="id-1bdc8d88-fe15-4530-b981-0c478b3e1ff1">
+                <dc:Bounds height="30.0" width="30.0" x="450.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-9b1c23a4-b2a2-4559-b2cd-c516994ae894" id="id-c9cc25f3-9856-470c-b15b-5079f0886f94" sourceElement="tns:id-d4f0c694-7deb-4e74-b782-d9ac8e57e480" targetElement="tns:id-1bdc8d88-fe15-4530-b981-0c478b3e1ff1">
+                <ns4:waypoint x="400.0" y="70.0"/>
+                <ns4:waypoint x="450.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

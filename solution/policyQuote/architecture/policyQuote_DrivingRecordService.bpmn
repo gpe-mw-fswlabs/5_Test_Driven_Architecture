@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><bpmn2:definitions xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:ns4="http://www.omg.org/spec/DD/20100524/DI" xmlns:savns0="http://dmv.com/drivingRecord" xmlns:tns="http://www.savara.org/policyQuote/DrivingRecordService" id="id-policyQuote-DrivingRecordService" targetNamespace="http://www.savara.org/policyQuote/DrivingRecordService">
+    <bpmn2:import importType="http://www.w3.org/2001/XMLSchema" location="../schema/drivingRecord.xsd" namespace="http://dmv.com/drivingRecord"/>
+    <bpmn2:itemDefinition id="ITEMdrivingRecordRequest" structureRef="savns0:drivingRecordRequest"/>
+    <bpmn2:message id="IDdrivingRecordRequest" itemRef="tns:ITEMdrivingRecordRequest" name="drivingRecordRequest"/>
+    <bpmn2:itemDefinition id="ITEMdrivingRecordResponse" structureRef="savns0:drivingRecordResponse"/>
+    <bpmn2:message id="IDdrivingRecordResponse" itemRef="tns:ITEMdrivingRecordResponse" name="drivingRecordResponse"/>
+    <bpmn2:collaboration id="id-5e7d2b28-a55a-404f-9851-3f7a0907458c">
+        <bpmn2:participant id="id-73f64645-e642-4f17-b5aa-1e9e7f587eaf" name="DrivingRecordService" processRef="tns:id-20ca68fd-0531-4af2-a31d-317d5908d5e4"/>
+    </bpmn2:collaboration>
+    <bpmn2:process id="id-20ca68fd-0531-4af2-a31d-317d5908d5e4" name="DrivingRecordService">
+        <bpmn2:startEvent id="id-30778f46-7835-4ea4-9fe0-58517052b348">
+            <bpmn2:outgoing>tns:id-00cdd789-91ae-46a5-8e31-dc5dcc13d98e</bpmn2:outgoing>
+        </bpmn2:startEvent>
+        <bpmn2:endEvent id="id-acdc8889-cb99-4873-b2c7-48aceb153e3b">
+            <bpmn2:incoming>tns:id-e629ba0d-e02d-4956-83b6-9a9a82ea33a5</bpmn2:incoming>
+        </bpmn2:endEvent>
+        <bpmn2:task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="id-ef73b7f5-e6ee-4e72-9cfe-55e122dccb14" messageRef="tns:IDdrivingRecordRequest" name="Receive: checkDrivingRecord(drivingRecordRequest) from PolicyQuoteProcess" operationRef="tns:OP_DrivingRecordService_checkDrivingRecord" xsi:type="bpmn2:tReceiveTask">
+            <bpmn2:incoming>tns:id-00cdd789-91ae-46a5-8e31-dc5dcc13d98e</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-0269f1e9-f381-4369-b98a-a7efd38f52d7</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:task xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="id-f79f629b-3339-4e52-8aec-4fd2fd277bd2" messageRef="tns:IDdrivingRecordResponse" name="Send: receiveDrivingRecord(drivingRecordResponse) to PolicyQuoteProcess" operationRef="tns:OP_DrivingRecordService_receiveDrivingRecord" xsi:type="bpmn2:tSendTask">
+            <bpmn2:incoming>tns:id-0269f1e9-f381-4369-b98a-a7efd38f52d7</bpmn2:incoming>
+            <bpmn2:outgoing>tns:id-e629ba0d-e02d-4956-83b6-9a9a82ea33a5</bpmn2:outgoing>
+        </bpmn2:task>
+        <bpmn2:sequenceFlow id="id-0269f1e9-f381-4369-b98a-a7efd38f52d7" sourceRef="id-ef73b7f5-e6ee-4e72-9cfe-55e122dccb14" targetRef="id-f79f629b-3339-4e52-8aec-4fd2fd277bd2"/>
+        <bpmn2:sequenceFlow id="id-00cdd789-91ae-46a5-8e31-dc5dcc13d98e" sourceRef="id-30778f46-7835-4ea4-9fe0-58517052b348" targetRef="id-ef73b7f5-e6ee-4e72-9cfe-55e122dccb14"/>
+        <bpmn2:sequenceFlow id="id-e629ba0d-e02d-4956-83b6-9a9a82ea33a5" sourceRef="id-f79f629b-3339-4e52-8aec-4fd2fd277bd2" targetRef="id-acdc8889-cb99-4873-b2c7-48aceb153e3b"/>
+    </bpmn2:process>
+    <bpmn2:interface id="DrivingRecordServiceInterface" name="DrivingRecordService">
+        <bpmn2:operation id="OP_DrivingRecordService_checkDrivingRecord" name="checkDrivingRecord">
+            <bpmn2:inMessageRef>tns:IDdrivingRecordRequest</bpmn2:inMessageRef>
+        </bpmn2:operation>
+        <bpmn2:operation id="OP_DrivingRecordService_receiveDrivingRecord" name="receiveDrivingRecord">
+            <bpmn2:outMessageRef>tns:IDdrivingRecordResponse</bpmn2:outMessageRef>
+        </bpmn2:operation>
+    </bpmn2:interface>
+    <bpmndi:BPMNDiagram id="id-025a807a-be5b-4711-8bc4-57db7ceaf13c">
+        <bpmndi:BPMNPlane>
+            <bpmndi:BPMNShape bpmnElement="tns:id-73f64645-e642-4f17-b5aa-1e9e7f587eaf" id="id-b8d62d31-e933-4be6-8cc2-0946b44ac1b5">
+                <dc:Bounds height="140.0" width="530.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-30778f46-7835-4ea4-9fe0-58517052b348" id="id-bd80fc8f-6e44-454e-b4e8-1ec69b4a8732">
+                <dc:Bounds height="30.0" width="30.0" x="50.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-ef73b7f5-e6ee-4e72-9cfe-55e122dccb14" id="id-a48f6424-c935-44bb-9809-bce41ec2a954">
+                <dc:Bounds height="60.0" width="110.0" x="130.0" y="40.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNShape bpmnElement="tns:id-f79f629b-3339-4e52-8aec-4fd2fd277bd2" id="id-24ebb030-1e86-4536-b790-e435f2d9bf65">
+                <dc:Bounds height="60.0" width="110.0" x="290.0" y="40.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-0269f1e9-f381-4369-b98a-a7efd38f52d7" id="id-dbc88ae7-b8ad-4642-a221-a7bbf7217239" sourceElement="tns:id-a48f6424-c935-44bb-9809-bce41ec2a954" targetElement="tns:id-24ebb030-1e86-4536-b790-e435f2d9bf65">
+                <ns4:waypoint x="240.0" y="70.0"/>
+                <ns4:waypoint x="290.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-00cdd789-91ae-46a5-8e31-dc5dcc13d98e" id="id-63bddf27-c994-43fd-b26d-e9847b873f17" sourceElement="tns:id-bd80fc8f-6e44-454e-b4e8-1ec69b4a8732" targetElement="tns:id-a48f6424-c935-44bb-9809-bce41ec2a954">
+                <ns4:waypoint x="80.0" y="70.0"/>
+                <ns4:waypoint x="130.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+            <bpmndi:BPMNShape bpmnElement="tns:id-acdc8889-cb99-4873-b2c7-48aceb153e3b" id="id-830297f7-ff69-4fff-bfdc-8999abae1f44">
+                <dc:Bounds height="30.0" width="30.0" x="450.0" y="55.0"/>
+            </bpmndi:BPMNShape>
+            <bpmndi:BPMNEdge bpmnElement="tns:id-e629ba0d-e02d-4956-83b6-9a9a82ea33a5" id="id-02b7d09f-cb95-4471-afa3-9ede194b478a" sourceElement="tns:id-24ebb030-1e86-4536-b790-e435f2d9bf65" targetElement="tns:id-830297f7-ff69-4fff-bfdc-8999abae1f44">
+                <ns4:waypoint x="400.0" y="70.0"/>
+                <ns4:waypoint x="450.0" y="70.0"/>
+            </bpmndi:BPMNEdge>
+        </bpmndi:BPMNPlane>
+    </bpmndi:BPMNDiagram>
+</bpmn2:definitions>

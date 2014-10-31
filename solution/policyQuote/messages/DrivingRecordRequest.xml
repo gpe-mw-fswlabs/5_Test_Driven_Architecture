@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drv:drivingRecordRequest 
+	xmlns:drv="http://dmv.com/drivingRecord"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://dmv.com/drivingRecord ../schema/drivingRecord.xsd">
+
+	<drv:name>Bill Smith</drv:name>
+	<drv:ssn>012345678</drv:ssn>
+	<drv:dlNumber>987654321</drv:dlNumber>
+	<drv:age>30</drv:age>
+</drv:drivingRecordRequest>

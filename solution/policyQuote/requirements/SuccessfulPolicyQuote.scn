@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<scenario xmlns="http://www.savara.org/scenario" name="PolicyQuoteSuccessful">
+    <description>Scenario of a successful policy quote</description>
+    <role name="Driver" id="e6aca03b-2c7a-42c1-918d-3dd1928dfb38"/>
+    <role name="PolicyQuoteProcess" id="998ee92e-0e2c-4080-95ea-829e4263961c"/>
+    <role name="DrivingRecordService" id="36e8cf95-bdee-41d3-bf60-6dc103153c0f"/>
+    <role name="CreditCheckService" id="50ca9bc0-dde7-4ee7-819d-3535d619827f"/>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="receivePolicyQuote" role="e6aca03b-2c7a-42c1-918d-3dd1928dfb38" id="6aa0daf6-30bf-4319-ace8-cdde45687bdd">
+        <parameter value="../messages/PolicyQuoteRequest.xml" type="{http://www.example.org/policyQuote}policyQuote"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="receivePolicyQuote" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="e121df54-97ee-4896-9462-bbc8e9f2ae12">
+        <parameter value="../messages/PolicyQuoteRequest.xml" type="{http://www.example.org/policyQuote}policyQuote"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="checkDrivingRecord" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="f48efd1b-cf71-4c6a-916b-bd23b13d3376">
+        <parameter value="../messages/DrivingRecordRequest.xml" type="{http://dmv.com/drivingRecord}drivingRecordRequest"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="checkDrivingRecord" role="36e8cf95-bdee-41d3-bf60-6dc103153c0f" id="42951c12-a02c-4bf7-b6e2-72e834907f5b">
+        <parameter value="../messages/DrivingRecordRequest.xml" type="{http://dmv.com/drivingRecord}drivingRecordRequest"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="receiveDrivingRecord" role="36e8cf95-bdee-41d3-bf60-6dc103153c0f" id="c2c9fc54-1fe2-4d4c-9f10-2c2dad150b6a">
+        <parameter value="../messages/DrivingRecordResponse.xml" type="{http://dmv.com/drivingRecord}drivingRecordResponse"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="receiveDrivingRecord" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="338d4d7f-4895-4f38-85df-11705f714a34">
+        <parameter value="../messages/DrivingRecordResponse.xml" type="{http://dmv.com/drivingRecord}drivingRecordResponse"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="checkCredit" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="d7ffc484-b43d-4709-95b3-ddd697150c88">
+        <parameter value="../messages/CreditCheckRequest.xml" type="{http://creditagency.com/creditCheck}creditCheckRequest"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="checkCredit" role="50ca9bc0-dde7-4ee7-819d-3535d619827f" id="36ba1cea-62f2-44e2-bc1a-f4328669536f">
+        <parameter value="../messages/CreditCheckRequest.xml" type="{http://creditagency.com/creditCheck}creditCheckRequest"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="checkCredit" role="50ca9bc0-dde7-4ee7-819d-3535d619827f" id="8aefadf1-d60d-46e7-a4bf-6da983d59e92">
+        <parameter value="../messages/CreditCheckResponse.xml" type="{http://creditagency.com/creditCheck}creditCheckResponse"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="checkCredit" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="3695b6a1-2e81-480f-a271-dfc3bad601a8">
+        <parameter value="../messages/CreditCheckResponse.xml" type="{http://creditagency.com/creditCheck}creditCheckResponse"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="SendEvent" operationName="receivePolicyQuote" role="998ee92e-0e2c-4080-95ea-829e4263961c" id="7ae3a6f5-395a-48b7-8f46-77708087ac4b">
+        <parameter value="../messages/PolicyQuoteResponse.xml" type="{http://www.example.org/policyQuote}policyQuoteReply"/>
+    </event>
+    <event xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ReceiveEvent" operationName="receivePolicyQuote" role="e6aca03b-2c7a-42c1-918d-3dd1928dfb38" id="4cd0d673-3985-416a-9da7-a5b3c39bfae8">
+        <parameter value="../messages/PolicyQuoteResponse.xml" type="{http://www.example.org/policyQuote}policyQuoteReply"/>
+    </event>
+    <link target="e121df54-97ee-4896-9462-bbc8e9f2ae12" source="6aa0daf6-30bf-4319-ace8-cdde45687bdd"/>
+    <link target="42951c12-a02c-4bf7-b6e2-72e834907f5b" source="f48efd1b-cf71-4c6a-916b-bd23b13d3376"/>
+    <link target="338d4d7f-4895-4f38-85df-11705f714a34" source="c2c9fc54-1fe2-4d4c-9f10-2c2dad150b6a"/>
+    <link target="36ba1cea-62f2-44e2-bc1a-f4328669536f" source="d7ffc484-b43d-4709-95b3-ddd697150c88"/>
+    <link target="3695b6a1-2e81-480f-a271-dfc3bad601a8" source="8aefadf1-d60d-46e7-a4bf-6da983d59e92"/>
+    <link target="4cd0d673-3985-416a-9da7-a5b3c39bfae8" source="7ae3a6f5-395a-48b7-8f46-77708087ac4b"/>
+</scenario>
